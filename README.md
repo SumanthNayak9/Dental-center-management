@@ -35,25 +35,52 @@ A comprehensive role-based dental center management system built with React.js, 
 
 ### Patient Access
 
-#### Patient 1 - John Smith
+#### Patient 1 - Priya Sharma
+- **Email**: `priya.sharma@email.com`
+- **Password**: `priya123`
+- **Role**: Patient
+- **Blood Type**: O+
+- **Location**: Bangalore, India
+- **Access**: Personal dashboard and data only
+
+#### Patient 2 - Rajesh Kumar
+- **Email**: `rajesh.kumar@email.com`
+- **Password**: `rajesh123`
+- **Role**: Patient
+- **Blood Type**: A+
+- **Location**: Bangalore, India
+- **Access**: Personal dashboard and data only
+
+#### Patient 3 - Anita Desai
+- **Email**: `anita.desai@email.com`
+- **Password**: `anita123`
+- **Role**: Patient
+- **Blood Type**: B-
+- **Location**: Bangalore, India
+- **Access**: Personal dashboard and data only
+
+#### Patient 4 - John Smith
 - **Email**: `john.smith@email.com`
 - **Password**: `john123`
 - **Role**: Patient
-- **Patient ID**: p1
+- **Blood Type**: O+
+- **Location**: Springfield, IL, USA
 - **Access**: Personal dashboard and data only
 
-#### Patient 2 - Emma Johnson
+#### Patient 5 - Emma Johnson
 - **Email**: `emma.johnson@email.com`
 - **Password**: `emma123`
 - **Role**: Patient
-- **Patient ID**: p2
+- **Blood Type**: A+
+- **Location**: Springfield, IL, USA
 - **Access**: Personal dashboard and data only
 
-#### Patient 3 - Michael Brown
+#### Patient 6 - Michael Brown
 - **Email**: `michael.brown@email.com`
 - **Password**: `michael123`
 - **Role**: Patient
-- **Patient ID**: p3
+- **Blood Type**: B-
+- **Location**: Springfield, IL, USA
 - **Access**: Personal dashboard and data only
 
 ## Getting Started
@@ -124,8 +151,10 @@ src/
 
 ### Admin Features
 - **Patient Table Management**: Professional table with action buttons (Incidents, Edit, Delete)
-- **KPI Cards**: Visual dashboard with key metrics
-- **Appointment Scheduling**: Calendar-based appointment management
+- **All Patients Overview**: Dashboard displays all 6 patients (3 Indian + 3 US patients) with dynamic data
+- **Patient Management List**: Complete patient table with all 6 patients, including blood type and allergies
+- **KPI Cards**: Visual dashboard with key metrics and total patient count
+- **Appointment Scheduling**: Calendar-based appointment management with dynamic patient data
 - **Responsive Design**: Optimized for desktop and mobile devices
 
 ### Patient Features
@@ -133,6 +162,12 @@ src/
 - **Summary Dashboard**: Personal statistics and overview
 - **Medical History**: Access to treatment records and appointments
 - **Responsive Layout**: Mobile-friendly interface
+
+### Data Management
+- **Complete Patient Database**: All 6 patients (Priya Sharma, Rajesh Kumar, Anita Desai, John Smith, Emma Johnson, Michael Brown) are displayed in both the admin dashboard overview and patient management section
+- **Dynamic Updates**: Patient data is dynamically loaded from the DataContext
+- **Context API Integration**: Full state management with React Context for authentication and data
+- **localStorage Reset**: Use `clear-localStorage.html` to refresh data if needed
 
 ## Design System
 

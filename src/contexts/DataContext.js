@@ -101,26 +101,33 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     try {
       const storedPatients = localStorage.getItem('patients');
-      const storedAppointments = localStorage.getItem('appointments');
-      const storedIncidents = localStorage.getItem('incidents');
-
+      
       if (storedPatients) {
-        dispatch({ type: DATA_ACTIONS.SET_PATIENTS, payload: JSON.parse(storedPatients) });
+        const parsedPatients = JSON.parse(storedPatients);
+        // Check if the stored patients have the new fields, if not reinitialize
+        if (parsedPatients.length > 0 && !parsedPatients[0].bloodType) {
+          initializeDefaultData();
+        } else {
+          dispatch({ type: DATA_ACTIONS.SET_PATIENTS, payload: parsedPatients });
+        }
       } else {
         // Initialize with default patients if none exist
         initializeDefaultData();
       }
 
+      const storedAppointments = localStorage.getItem('appointments');
       if (storedAppointments) {
         dispatch({ type: DATA_ACTIONS.SET_APPOINTMENTS, payload: JSON.parse(storedAppointments) });
       }
 
+      const storedIncidents = localStorage.getItem('incidents');
       if (storedIncidents) {
         dispatch({ type: DATA_ACTIONS.SET_INCIDENTS, payload: JSON.parse(storedIncidents) });
       }
     } catch (error) {
       console.error('Error loading data from localStorage:', error);
       dispatch({ type: DATA_ACTIONS.SET_ERROR, payload: 'Failed to load data' });
+      initializeDefaultData();
     }
   }, []);
 
@@ -134,6 +141,9 @@ export const DataProvider = ({ children }) => {
         phone: '+91 9876543210',
         age: 30,
         address: '123 MG Road, Bangalore, Karnataka 560001',
+        bloodType: 'O+',
+        allergies: 'Penicillin, Latex',
+        emergencyContact: 'Rahul Sharma - +91 9876543211',
         medicalHistory: 'No major issues, regular checkups',
         lastVisit: '2024-01-15',
         nextAppointment: '2024-02-15',
@@ -159,6 +169,9 @@ export const DataProvider = ({ children }) => {
         phone: '+91 9876543220',
         age: 40,
         address: '456 Brigade Road, Bangalore, Karnataka 560025',
+        bloodType: 'A+',
+        allergies: 'None known',
+        emergencyContact: 'Sunita Kumar - +91 9876543221',
         medicalHistory: 'Diabetes, requires special care',
         lastVisit: '2024-01-20',
         nextAppointment: '2024-02-20',
@@ -182,6 +195,9 @@ export const DataProvider = ({ children }) => {
         phone: '+91 9876543230',
         age: 47,
         address: '789 Commercial Street, Bangalore, Karnataka 560001',
+        bloodType: 'B-',
+        allergies: 'Codeine',
+        emergencyContact: 'Vikram Desai - +91 9876543231',
         medicalHistory: 'Sensitive teeth, allergic to certain medications',
         lastVisit: '2024-01-25',
         nextAppointment: '2024-02-25',
@@ -198,6 +214,87 @@ export const DataProvider = ({ children }) => {
         billingHistory: [
           { id: 5, date: '2024-01-25', amount: 18000, description: 'Crown Preparation', status: 'Paid' },
           { id: 6, date: '2024-01-10', amount: 30000, description: 'Crown Placement', status: 'Pending' }
+        ]
+      },
+      {
+        id: 4,
+        name: 'John Smith',
+        email: 'john.smith@email.com',
+        phone: '+1 (555) 123-4567',
+        age: 39,
+        address: '123 Main St, Springfield, IL 62701',
+        bloodType: 'O+',
+        allergies: 'Penicillin, Latex',
+        emergencyContact: 'Jane Smith - (555) 123-4568',
+        medicalHistory: 'Hypertension, Previous root canal',
+        lastVisit: '2024-06-25',
+        nextAppointment: '2024-07-15',
+        totalBill: 1430,
+        password: 'john123',
+        appointments: [
+          { id: 7, date: '2024-07-05', time: '09:00 AM', type: 'Dental Cleaning', status: 'Confirmed' },
+          { id: 8, date: '2024-07-15', time: '02:00 PM', type: 'Root Canal Follow-up', status: 'Scheduled' }
+        ],
+        treatmentHistory: [
+          { id: 7, date: '2024-06-25', treatment: 'Root Canal', cost: 1250, doctor: 'Dr. Johnson' },
+          { id: 8, date: '2024-05-20', treatment: 'Dental Cleaning', cost: 180, doctor: 'Dr. Johnson' }
+        ],
+        billingHistory: [
+          { id: 7, date: '2024-06-25', amount: 1250, description: 'Root Canal', status: 'Paid' },
+          { id: 8, date: '2024-05-20', amount: 180, description: 'Dental Cleaning', status: 'Paid' }
+        ]
+      },
+      {
+        id: 5,
+        name: 'Emma Johnson',
+        email: 'emma.johnson@email.com',
+        phone: '+1 (555) 234-5678',
+        age: 35,
+        address: '456 Oak Ave, Springfield, IL 62702',
+        bloodType: 'A+',
+        allergies: 'None known',
+        emergencyContact: 'Michael Johnson - (555) 234-5679',
+        medicalHistory: 'Regular checkups, Wisdom teeth removed',
+        lastVisit: '2024-06-22',
+        nextAppointment: '2024-07-08',
+        totalBill: 200,
+        password: 'emma123',
+        appointments: [
+          { id: 9, date: '2024-07-08', time: '10:30 AM', type: 'Teeth Whitening', status: 'Confirmed' }
+        ],
+        treatmentHistory: [
+          { id: 9, date: '2024-06-22', treatment: 'Orthodontic Consultation', cost: 200, doctor: 'Dr. Smith' }
+        ],
+        billingHistory: [
+          { id: 9, date: '2024-06-22', amount: 200, description: 'Orthodontic Consultation', status: 'Paid' }
+        ]
+      },
+      {
+        id: 6,
+        name: 'Michael Brown',
+        email: 'michael.brown@email.com',
+        phone: '+1 (555) 345-6789',
+        age: 47,
+        address: '789 Pine St, Springfield, IL 62703',
+        bloodType: 'B-',
+        allergies: 'Codeine',
+        emergencyContact: 'Sarah Brown - (555) 345-6780',
+        medicalHistory: 'Diabetes, Multiple fillings',
+        lastVisit: '2024-06-15',
+        nextAppointment: '2024-07-25',
+        totalBill: 2000,
+        password: 'michael123',
+        appointments: [
+          { id: 10, date: '2024-07-10', time: '11:00 AM', type: 'Crown Placement', status: 'Confirmed' },
+          { id: 11, date: '2024-07-25', time: '03:30 PM', type: 'Follow-up Checkup', status: 'Scheduled' }
+        ],
+        treatmentHistory: [
+          { id: 10, date: '2024-06-15', treatment: 'Crown Preparation', cost: 800, doctor: 'Dr. Johnson' },
+          { id: 11, date: '2024-07-10', treatment: 'Crown Placement', cost: 1200, doctor: 'Dr. Johnson' }
+        ],
+        billingHistory: [
+          { id: 10, date: '2024-06-15', amount: 800, description: 'Crown Preparation', status: 'Paid' },
+          { id: 11, date: '2024-07-10', amount: 1200, description: 'Crown Placement', status: 'Pending' }
         ]
       }
     ];

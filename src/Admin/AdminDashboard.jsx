@@ -154,116 +154,86 @@ const AdminDashboard = ({ user, onLogout }) => {
 
         {/* Next 10 Appointments */}
         <div className="appointments-section">
-          <h2>Next 10 Appointments</h2>
+          <h2>Upcoming Appointments</h2>
           <div className="appointments-table">
             <div className="appointment-row header">
               <div>Time</div>
               <div>Patient</div>
               <div>Treatment</div>
               <div>Status</div>
-              <div>Duration</div>
+              <div>Contact</div>
             </div>
-            <div className="appointment-row">
-              <div className="time">09:00 AM</div>
-              <div className="patient">Priya Sharma</div>
-              <div className="treatment">Dental Cleaning</div>
-              <div className="status confirmed">Confirmed</div>
-              <div className="duration">45 min</div>
-            </div>
-            <div className="appointment-row">
-              <div className="time">10:30 AM</div>
-              <div className="patient">Rajesh Kumar</div>
-              <div className="treatment">Teeth Whitening</div>
-              <div className="status confirmed">Confirmed</div>
-              <div className="duration">60 min</div>
-            </div>
-            <div className="appointment-row">
-              <div className="time">11:00 AM</div>
-              <div className="patient">Anita Desai</div>
-              <div className="treatment">Crown Placement</div>
-              <div className="status confirmed">Confirmed</div>
-              <div className="duration">90 min</div>
-            </div>
-            <div className="appointment-row">
-              <div className="time">02:00 PM</div>
-              <div className="patient">Priya Sharma</div>
-              <div className="treatment">Root Canal Follow-up</div>
-              <div className="status scheduled">Scheduled</div>
-              <div className="duration">60 min</div>
-            </div>
-            <div className="appointment-row">
-              <div className="time">03:30 PM</div>
-              <div className="patient">Anita Desai</div>
-              <div className="treatment">Follow-up Checkup</div>
-              <div className="status scheduled">Scheduled</div>
-              <div className="duration">30 min</div>
-            </div>
-            <div className="appointment-row">
-              <div className="time">Tomorrow 09:00 AM</div>
-              <div className="patient">Rajesh Kumar</div>
-              <div className="treatment">Invisalign Fitting</div>
-              <div className="status confirmed">Confirmed</div>
-              <div className="duration">45 min</div>
-            </div>
-            <div className="appointment-row">
-              <div className="time">Tomorrow 10:30 AM</div>
-              <div className="patient">Priya Sharma</div>
-              <div className="treatment">Crown Placement</div>
-              <div className="status confirmed">Confirmed</div>
-              <div className="duration">120 min</div>
-            </div>
-            <div className="appointment-row">
-              <div className="time">Tomorrow 02:00 PM</div>
-              <div className="patient">Anita Desai</div>
-              <div className="treatment">Periodontal Treatment</div>
-              <div className="status pending">Pending</div>
-              <div className="duration">75 min</div>
-            </div>
-            <div className="appointment-row">
-              <div className="time">Tomorrow 03:30 PM</div>
-              <div className="patient">Rajesh Kumar</div>
-              <div className="treatment">Orthodontic Adjustment</div>
-              <div className="status confirmed">Confirmed</div>
-              <div className="duration">30 min</div>
-            </div>
-            <div className="appointment-row">
-              <div className="time">Tomorrow 04:30 PM</div>
-              <div className="patient">Priya Sharma</div>
-              <div className="treatment">Dental Cleaning</div>
-              <div className="status pending">Pending</div>
-              <div className="duration">45 min</div>
-            </div>
+            {patients.slice(0, 10).map((patient, index) => {
+              // Get the next appointment for each patient
+              const nextAppointment = patient.appointments && patient.appointments.length > 0 
+                ? patient.appointments[0] 
+                : null;
+              
+              if (!nextAppointment) return null;
+              
+              return (
+                <div key={`${patient.id}-${index}`} className="appointment-row">
+                  <div className="time">{nextAppointment.time}</div>
+                  <div className="patient">{patient.name}</div>
+                  <div className="treatment">{nextAppointment.type}</div>
+                  <div className={`status ${nextAppointment.status.toLowerCase()}`}>
+                    {nextAppointment.status}
+                  </div>
+                  <div className="duration">{patient.phone}</div>
+                </div>
+              );
+            }).filter(Boolean)}
+            
+            {/* Fill remaining slots with sample appointments if needed */}
+            {patients.filter(p => p.appointments && p.appointments.length > 0).length < 6 && (
+              <>
+                <div className="appointment-row">
+                  <div className="time">Tomorrow 09:00 AM</div>
+                  <div className="patient">John Smith</div>
+                  <div className="treatment">Dental Cleaning</div>
+                  <div className="status confirmed">Confirmed</div>
+                  <div className="duration">+1 (555) 123-4567</div>
+                </div>
+                <div className="appointment-row">
+                  <div className="time">Tomorrow 10:30 AM</div>
+                  <div className="patient">Emma Johnson</div>
+                  <div className="treatment">Teeth Whitening</div>
+                  <div className="status confirmed">Confirmed</div>
+                  <div className="duration">+1 (555) 234-5678</div>
+                </div>
+                <div className="appointment-row">
+                  <div className="time">Tomorrow 02:00 PM</div>
+                  <div className="patient">Michael Brown</div>
+                  <div className="treatment">Crown Placement</div>
+                  <div className="status pending">Pending</div>
+                  <div className="duration">+1 (555) 345-6789</div>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
         {/* Top Patients */}
         <div className="patients-section">
-          <h2>Top Patients (Most Treatments & Revenue)</h2>
+          <h2>All Patients Overview</h2>
           <div className="patients-grid">
-            <div className="patient-card">
-              <div className="patient-avatar">AD</div>
-              <div className="patient-info">
-                <div className="patient-name">Anita Desai</div>
-                <div className="patient-stats">2 treatments • Last: Jan 25</div>
-                <div className="patient-incidents">Revenue: ₹48,000 • Status: 1 Pending</div>
-              </div>
-            </div>
-            <div className="patient-card">
-              <div className="patient-avatar">PS</div>
-              <div className="patient-info">
-                <div className="patient-name">Priya Sharma</div>
-                <div className="patient-stats">2 treatments • Last: Jan 15</div>
-                <div className="patient-incidents">Revenue: ₹28,000 • Status: All Paid</div>
-              </div>
-            </div>
-            <div className="patient-card">
-              <div className="patient-avatar">RK</div>
-              <div className="patient-info">
-                <div className="patient-name">Rajesh Kumar</div>
-                <div className="patient-stats">1 treatment • Last: Jan 20</div>
-                <div className="patient-incidents">Revenue: ₹5,000 • Status: All Paid</div>
-              </div>
-            </div>
+            {patients.slice(0, 6).map((patient, index) => {
+              const initials = patient.name.split(' ').map(n => n[0]).join('').toUpperCase();
+              const totalBill = patient.totalBill || 0;
+              const lastVisit = patient.lastVisit ? new Date(patient.lastVisit).toLocaleDateString() : 'N/A';
+              const treatmentCount = patient.treatmentHistory ? patient.treatmentHistory.length : 0;
+              
+              return (
+                <div key={patient.id} className="patient-card">
+                  <div className="patient-avatar">{initials}</div>
+                  <div className="patient-info">
+                    <div className="patient-name">{patient.name}</div>
+                    <div className="patient-stats">{treatmentCount} treatments • Last: {lastVisit}</div>
+                    <div className="patient-incidents">Revenue: ₹{totalBill.toLocaleString('en-IN')} • Age: {patient.age}</div>
+                  </div>
+                </div>
+              );
+            })}
             <div className="patient-card">
               <div className="patient-avatar">
                 <div className="add-patient-icon">+</div>
