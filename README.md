@@ -150,7 +150,7 @@ src/
 ## User Experience Features
 
 ### Admin Features
-- **Patient Table Management**: Professional table with action buttons (Incidents, Edit, Delete)
+- **Patient Table Management** Professional table with action buttons (Incidents, Edit, Delete)
 - **All Patients Overview**: Dashboard displays all 6 patients (3 Indian + 3 US patients) with dynamic data
 - **Patient Management List**: Complete patient table with all 6 patients, including blood type and allergies
 - **KPI Cards**: Visual dashboard with key metrics and total patient count

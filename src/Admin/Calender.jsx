@@ -140,7 +140,7 @@ const Calendar = ({ user, onLogout, onBack }) => {
       return (
         <div className="no-appointments">
           <h3>No appointments for {selectedDate.toLocaleDateString()}</h3>
-          <button className="add-appointment-btn">+ Add Appointment</button>
+          <p>No appointments scheduled for this date.</p>
         </div>
       );
     }
