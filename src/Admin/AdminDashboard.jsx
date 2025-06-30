@@ -118,21 +118,17 @@ const AdminDashboard = ({ user, onLogout }) => {
               <div className="kpi-icon">💰</div>
               <div className="kpi-content">
                 <h3>Monthly Revenue</h3>
-                <div className="kpi-value">
-                  ₹{patients.reduce((total, patient) => total + (patient.totalBill || 0), 0).toLocaleString('en-IN')}
-                </div>
-                <div className="kpi-change positive">Total from all patients</div>
+                <div className="kpi-value">₹81,000</div>
+                <div className="kpi-change positive">+15% from last month</div>
               </div>
             </div>
             
             <div className="kpi-card appointments">
               <div className="kpi-icon">📅</div>
               <div className="kpi-content">
-                <h3>Upcoming Appointments</h3>
-                <div className="kpi-value">
-                  {patients.reduce((total, patient) => total + (patient.appointments?.filter(apt => apt.status === 'Scheduled').length || 0), 0)}
-                </div>
-                <div className="kpi-change neutral">Scheduled appointments</div>
+                <h3>Today's Appointments</h3>
+                <div className="kpi-value">5</div>
+                <div className="kpi-change neutral">3 confirmed, 2 pending</div>
               </div>
             </div>
             
@@ -148,68 +144,136 @@ const AdminDashboard = ({ user, onLogout }) => {
             <div className="kpi-card treatments">
               <div className="kpi-icon">🦷</div>
               <div className="kpi-content">
-                <h3>Total Treatments</h3>
-                <div className="kpi-value">
-                  {patients.reduce((total, patient) => total + (patient.treatmentHistory?.length || 0), 0)}
-                </div>
-                <div className="kpi-change positive">All treatments recorded</div>
+                <h3>Treatments This Week</h3>
+                <div className="kpi-value">8</div>
+                <div className="kpi-change positive">3 pending, 5 completed</div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Upcoming Appointments */}
+        {/* Next 10 Appointments */}
         <div className="appointments-section">
-          <h2>Upcoming Appointments</h2>
+          <h2>Next 10 Appointments</h2>
           <div className="appointments-table">
             <div className="appointment-row header">
-              <div>Date</div>
               <div>Time</div>
               <div>Patient</div>
               <div>Treatment</div>
               <div>Status</div>
+              <div>Duration</div>
             </div>
-            {patients.map(patient => 
-              patient.appointments?.filter(apt => apt.status === 'Scheduled').map(appointment => (
-                <div key={`${patient.id}-${appointment.id}`} className="appointment-row">
-                  <div className="date">{appointment.date}</div>
-                  <div className="time">{appointment.time}</div>
-                  <div className="patient">{patient.name}</div>
-                  <div className="treatment">{appointment.type}</div>
-                  <div className={`status ${appointment.status.toLowerCase()}`}>{appointment.status}</div>
-                </div>
-              ))
-            ).flat()}
-            {patients.every(patient => !patient.appointments?.some(apt => apt.status === 'Scheduled')) && (
-              <div className="appointment-row">
-                <div colSpan="5" style={{textAlign: 'center', color: '#666'}}>
-                  No upcoming appointments
-                </div>
-              </div>
-            )}
+            <div className="appointment-row">
+              <div className="time">09:00 AM</div>
+              <div className="patient">Priya Sharma</div>
+              <div className="treatment">Dental Cleaning</div>
+              <div className="status confirmed">Confirmed</div>
+              <div className="duration">45 min</div>
+            </div>
+            <div className="appointment-row">
+              <div className="time">10:30 AM</div>
+              <div className="patient">Rajesh Kumar</div>
+              <div className="treatment">Teeth Whitening</div>
+              <div className="status confirmed">Confirmed</div>
+              <div className="duration">60 min</div>
+            </div>
+            <div className="appointment-row">
+              <div className="time">11:00 AM</div>
+              <div className="patient">Anita Desai</div>
+              <div className="treatment">Crown Placement</div>
+              <div className="status confirmed">Confirmed</div>
+              <div className="duration">90 min</div>
+            </div>
+            <div className="appointment-row">
+              <div className="time">02:00 PM</div>
+              <div className="patient">Priya Sharma</div>
+              <div className="treatment">Root Canal Follow-up</div>
+              <div className="status scheduled">Scheduled</div>
+              <div className="duration">60 min</div>
+            </div>
+            <div className="appointment-row">
+              <div className="time">03:30 PM</div>
+              <div className="patient">Anita Desai</div>
+              <div className="treatment">Follow-up Checkup</div>
+              <div className="status scheduled">Scheduled</div>
+              <div className="duration">30 min</div>
+            </div>
+            <div className="appointment-row">
+              <div className="time">Tomorrow 09:00 AM</div>
+              <div className="patient">Rajesh Kumar</div>
+              <div className="treatment">Invisalign Fitting</div>
+              <div className="status confirmed">Confirmed</div>
+              <div className="duration">45 min</div>
+            </div>
+            <div className="appointment-row">
+              <div className="time">Tomorrow 10:30 AM</div>
+              <div className="patient">Priya Sharma</div>
+              <div className="treatment">Crown Placement</div>
+              <div className="status confirmed">Confirmed</div>
+              <div className="duration">120 min</div>
+            </div>
+            <div className="appointment-row">
+              <div className="time">Tomorrow 02:00 PM</div>
+              <div className="patient">Anita Desai</div>
+              <div className="treatment">Periodontal Treatment</div>
+              <div className="status pending">Pending</div>
+              <div className="duration">75 min</div>
+            </div>
+            <div className="appointment-row">
+              <div className="time">Tomorrow 03:30 PM</div>
+              <div className="patient">Rajesh Kumar</div>
+              <div className="treatment">Orthodontic Adjustment</div>
+              <div className="status confirmed">Confirmed</div>
+              <div className="duration">30 min</div>
+            </div>
+            <div className="appointment-row">
+              <div className="time">Tomorrow 04:30 PM</div>
+              <div className="patient">Priya Sharma</div>
+              <div className="treatment">Dental Cleaning</div>
+              <div className="status pending">Pending</div>
+              <div className="duration">45 min</div>
+            </div>
           </div>
         </div>
 
-        {/* Recent Patients */}
+        {/* Top Patients */}
         <div className="patients-section">
-          <h2>Patient Overview</h2>
+          <h2>Top Patients (Most Treatments & Revenue)</h2>
           <div className="patients-grid">
-            {patients.slice(0, 4).map(patient => (
-              <div key={patient.id} className="patient-card">
-                <div className="patient-avatar">
-                  {patient.name.split(' ').map(n => n[0]).join('')}
-                </div>
-                <div className="patient-info">
-                  <div className="patient-name">{patient.name}</div>
-                  <div className="patient-stats">
-                    {patient.treatmentHistory?.length || 0} treatments • Last: {patient.lastVisit}
-                  </div>
-                  <div className="patient-incidents">
-                    Total Bill: ₹{patient.totalBill?.toLocaleString('en-IN') || '0'}
-                  </div>
-                </div>
+            <div className="patient-card">
+              <div className="patient-avatar">AD</div>
+              <div className="patient-info">
+                <div className="patient-name">Anita Desai</div>
+                <div className="patient-stats">2 treatments • Last: Jan 25</div>
+                <div className="patient-incidents">Revenue: ₹48,000 • Status: 1 Pending</div>
               </div>
-            ))}
+            </div>
+            <div className="patient-card">
+              <div className="patient-avatar">PS</div>
+              <div className="patient-info">
+                <div className="patient-name">Priya Sharma</div>
+                <div className="patient-stats">2 treatments • Last: Jan 15</div>
+                <div className="patient-incidents">Revenue: ₹28,000 • Status: All Paid</div>
+              </div>
+            </div>
+            <div className="patient-card">
+              <div className="patient-avatar">RK</div>
+              <div className="patient-info">
+                <div className="patient-name">Rajesh Kumar</div>
+                <div className="patient-stats">1 treatment • Last: Jan 20</div>
+                <div className="patient-incidents">Revenue: ₹5,000 • Status: All Paid</div>
+              </div>
+            </div>
+            <div className="patient-card">
+              <div className="patient-avatar">
+                <div className="add-patient-icon">+</div>
+              </div>
+              <div className="patient-info">
+                <div className="patient-name">Add New Patient</div>
+                <div className="patient-stats">Click to add new patient</div>
+                <div className="patient-incidents">Expand your practice</div>
+              </div>
+            </div>
           </div>
         </div>
       </main>

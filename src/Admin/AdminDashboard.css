@@ -465,6 +465,22 @@
   display: inline-block;
 }
 
+.add-patient-icon {
+  font-size: 24px;
+  color: #667eea;
+  font-weight: bold;
+}
+
+.patient-card .add-patient-icon {
+  background: linear-gradient(135deg, #e8edf7 0%, #f0f4f8 100%);
+  color: #667eea;
+}
+
+.patient-card:hover .add-patient-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
 /* Profile Page Styles */
 .profile-container {
   max-width: 1000px;
