@@ -104,11 +104,16 @@ export const DataProvider = ({ children }) => {
       
       if (storedPatients) {
         const parsedPatients = JSON.parse(storedPatients);
-        // Check if the stored patients have the new fields, if not reinitialize
-        if (parsedPatients.length > 0 && !parsedPatients[0].bloodType) {
-          initializeDefaultData();
-        } else {
+        // Check if the stored patients have all the required fields and all 6 patients
+        if (parsedPatients.length === 6 && 
+            parsedPatients.every(p => p.bloodType && p.password && p.email) &&
+            parsedPatients.some(p => p.email === 'john.smith@email.com') &&
+            parsedPatients.some(p => p.email === 'emma.johnson@email.com') &&
+            parsedPatients.some(p => p.email === 'michael.brown@email.com')) {
           dispatch({ type: DATA_ACTIONS.SET_PATIENTS, payload: parsedPatients });
+        } else {
+          console.log('Stored patient data is incomplete or outdated, reinitializing...');
+          initializeDefaultData();
         }
       } else {
         // Initialize with default patients if none exist

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth, usePatientProfile } from './contexts';
+import { useAuth, useData } from './contexts';
 import './App.css';
 
 const LoginPage = () => {
@@ -9,12 +9,19 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   
   const { login } = useAuth();
-  const { getPatientProfile } = usePatientProfile();
+  const { patients } = useData();
 
   const handleLogin = (e) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
+
+    // Check if patients data is loaded
+    if (!patients || patients.length === 0) {
+      setError('Patient data is still loading. Please try again.');
+      setIsLoading(false);
+      return;
+    }
 
     // Simulate loading delay
     setTimeout(() => {
@@ -32,12 +39,13 @@ const LoginPage = () => {
       }
 
       // Check for patient login
-      const patientProfile = getPatientProfile(email);
-      if (patientProfile && patientProfile.password === password) {
+      const patient = patients.find(p => p.email === email && p.password === password);
+      
+      if (patient) {
         const patientUser = {
-          id: patientProfile.id,
-          email: patientProfile.email,
-          name: patientProfile.name,
+          id: patient.id,
+          email: patient.email,
+          name: patient.name,
           role: 'Patient'
         };
         login(patientUser, 'patient');

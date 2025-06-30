@@ -267,6 +267,222 @@ export const PatientProfileProvider = ({ children }) => {
               dueDate: '2024-08-10'
             }
           ]
+        },
+        'john.smith@email.com': {
+          id: 4,
+          name: 'John Smith',
+          email: 'john.smith@email.com',
+          password: 'john123',
+          dob: '1985-03-15',
+          phone: '+1 (555) 123-4567',
+          address: '123 Main St, Springfield, IL 62701',
+          emergencyContact: 'Jane Smith - (555) 123-4568',
+          bloodType: 'O+',
+          allergies: ['Penicillin', 'Latex'],
+          insurance: 'Blue Cross Blue Shield - Policy #BCBS789012',
+          appointments: [
+            {
+              id: 6,
+              date: '2024-07-05',
+              time: '09:00 AM',
+              treatment: 'Dental Cleaning',
+              doctor: 'Dr. Johnson',
+              status: 'Confirmed',
+              notes: 'Regular cleaning and checkup'
+            },
+            {
+              id: 7,
+              date: '2024-07-15',
+              time: '02:00 PM',
+              treatment: 'Root Canal Follow-up',
+              doctor: 'Dr. Johnson',
+              status: 'Scheduled',
+              notes: 'Follow-up for previous root canal treatment'
+            }
+          ],
+          medicalHistory: [
+            {
+              id: 5,
+              date: '2024-06-25',
+              treatment: 'Root Canal',
+              doctor: 'Dr. Johnson',
+              notes: 'Root canal treatment on upper molar. Hypertension monitored during procedure.',
+              prescription: 'Amoxicillin 500mg, Ibuprofen 600mg'
+            },
+            {
+              id: 6,
+              date: '2024-05-20',
+              treatment: 'Dental Cleaning',
+              doctor: 'Dr. Johnson',
+              notes: 'Routine cleaning completed. Patient maintains good oral hygiene.',
+              prescription: 'None'
+            }
+          ],
+          treatmentPlans: [
+            {
+              id: 4,
+              title: 'Post Root Canal Care',
+              startDate: '2024-06-25',
+              endDate: '2024-12-25',
+              treatments: ['Root Canal Follow-up', 'Crown Evaluation', 'Regular Cleanings'],
+              progress: 40,
+              doctor: 'Dr. Johnson'
+            }
+          ],
+          bills: [
+            {
+              id: 6,
+              date: '2024-06-25',
+              treatment: 'Root Canal',
+              amount: 1250.00,
+              insurance: 750.00,
+              patientDue: 500.00,
+              status: 'Paid',
+              dueDate: '2024-07-25'
+            },
+            {
+              id: 7,
+              date: '2024-05-20',
+              treatment: 'Dental Cleaning',
+              amount: 180.00,
+              insurance: 150.00,
+              patientDue: 30.00,
+              status: 'Paid',
+              dueDate: '2024-06-20'
+            }
+          ]
+        },
+        'emma.johnson@email.com': {
+          id: 5,
+          name: 'Emma Johnson',
+          email: 'emma.johnson@email.com',
+          password: 'emma123',
+          dob: '1990-07-22',
+          phone: '+1 (555) 234-5678',
+          address: '456 Oak Ave, Springfield, IL 62702',
+          emergencyContact: 'Michael Johnson - (555) 234-5679',
+          bloodType: 'A+',
+          allergies: ['None known'],
+          insurance: 'Aetna - Policy #AET456789',
+          appointments: [
+            {
+              id: 8,
+              date: '2024-07-08',
+              time: '10:30 AM',
+              treatment: 'Teeth Whitening',
+              doctor: 'Dr. Smith',
+              status: 'Confirmed',
+              notes: 'Professional teeth whitening treatment'
+            }
+          ],
+          medicalHistory: [
+            {
+              id: 7,
+              date: '2024-06-22',
+              treatment: 'Orthodontic Consultation',
+              doctor: 'Dr. Smith',
+              notes: 'Consultation for cosmetic improvements. Patient interested in whitening and minor alignment.',
+              prescription: 'None'
+            }
+          ],
+          treatmentPlans: [
+            {
+              id: 5,
+              title: 'Cosmetic Enhancement',
+              startDate: '2024-07-01',
+              endDate: '2024-09-01',
+              treatments: ['Teeth Whitening', 'Cosmetic Evaluation', 'Follow-up Care'],
+              progress: 25,
+              doctor: 'Dr. Smith'
+            }
+          ],
+          bills: [
+            {
+              id: 8,
+              date: '2024-06-22',
+              treatment: 'Orthodontic Consultation',
+              amount: 200.00,
+              insurance: 100.00,
+              patientDue: 100.00,
+              status: 'Paid',
+              dueDate: '2024-07-22'
+            }
+          ]
+        },
+        'michael.brown@email.com': {
+          id: 6,
+          name: 'Michael Brown',
+          email: 'michael.brown@email.com',
+          password: 'michael123',
+          dob: '1978-11-08',
+          phone: '+1 (555) 345-6789',
+          address: '789 Pine St, Springfield, IL 62703',
+          emergencyContact: 'Sarah Brown - (555) 345-6780',
+          bloodType: 'B-',
+          allergies: ['Codeine'],
+          insurance: 'Cigna - Policy #CIG123456',
+          appointments: [
+            {
+              id: 9,
+              date: '2024-07-10',
+              time: '11:00 AM',
+              treatment: 'Crown Placement',
+              doctor: 'Dr. Johnson',
+              status: 'Confirmed',
+              notes: 'Crown placement for prepared tooth'
+            },
+            {
+              id: 10,
+              date: '2024-07-25',
+              time: '03:30 PM',
+              treatment: 'Follow-up Checkup',
+              doctor: 'Dr. Johnson',
+              status: 'Scheduled',
+              notes: 'Post-crown placement evaluation'
+            }
+          ],
+          medicalHistory: [
+            {
+              id: 8,
+              date: '2024-06-15',
+              treatment: 'Crown Preparation',
+              doctor: 'Dr. Johnson',
+              notes: 'Crown preparation for damaged molar. Diabetes management discussed.',
+              prescription: 'Amoxicillin 500mg (adjusted for diabetes)'
+            }
+          ],
+          treatmentPlans: [
+            {
+              id: 6,
+              title: 'Diabetic-Friendly Dental Care',
+              startDate: '2024-06-01',
+              endDate: '2024-12-01',
+              treatments: ['Crown Placement', 'Diabetic Monitoring', 'Regular Check-ups'],
+              progress: 60,
+              doctor: 'Dr. Johnson'
+            }
+          ],
+          bills: [
+            {
+              id: 9,
+              date: '2024-06-15',
+              treatment: 'Crown Preparation',
+              amount: 800.00,
+              insurance: 500.00,
+              patientDue: 300.00,
+              status: 'Paid',
+              dueDate: '2024-07-15'
+            },
+            {
+              id: 10,
+              date: '2024-07-10',
+              treatment: 'Crown Placement',
+              amount: 1200.00,
+              insurance: 700.00,
+              patientDue: 500.00,
+              status: 'Pending',
+              dueDate: '2024-08-10'
+            }          ]
         }
       };
 
