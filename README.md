@@ -1,0 +1,179 @@
+# Dental Center Management System
+
+A comprehensive role-based dental center management system built with React.js, featuring separate dashboards for administrators and patients with modern UI/UX design.
+
+## Features
+
+### Admin Dashboard
+- **Patient Management**: View, edit, and manage patient records
+- **Appointment Management**: Schedule and track appointments
+- **Incident Tracking**: Monitor and manage patient incidents
+- **KPI Dashboard**: Overview of key performance indicators
+- **Profile Management**: Edit patient profiles and medical information
+
+### Patient Dashboard
+- **Personal Profile**: View and edit personal information
+- **Appointment History**: Track past and upcoming appointments
+- **Medical Records**: Access medical history and treatment records
+- **Incident Reports**: View any reported incidents
+- **Summary Statistics**: Personal health and visit statistics
+
+### Key Features
+- **Role-based Authentication**: Separate access for admins and patients
+- **Data Isolation**: Patients can only access their own data
+- **Responsive Design**: Modern, card-based UI that works on all devices
+- **Professional Styling**: Consistent design language throughout the application
+- **Real-time Updates**: Dynamic data management and updates
+
+## Login Credentials
+
+### Administrator Access
+- **Email**: `admin@entnt.in`
+- **Password**: `admin123`
+- **Role**: Admin
+- **Access**: Full system access, can manage all patients and appointments
+
+### Patient Access
+
+#### Patient 1 - John Smith
+- **Email**: `john.smith@email.com`
+- **Password**: `john123`
+- **Role**: Patient
+- **Patient ID**: p1
+- **Access**: Personal dashboard and data only
+
+#### Patient 2 - Emma Johnson
+- **Email**: `emma.johnson@email.com`
+- **Password**: `emma123`
+- **Role**: Patient
+- **Patient ID**: p2
+- **Access**: Personal dashboard and data only
+
+#### Patient 3 - Michael Brown
+- **Email**: `michael.brown@email.com`
+- **Password**: `michael123`
+- **Role**: Patient
+- **Patient ID**: p3
+- **Access**: Personal dashboard and data only
+
+## Getting Started
+
+### Prerequisites
+- Node.js (version 14 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd dental-center-management
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:3000`
+
+### Available Scripts
+
+- `npm start` - Runs the app in development mode
+- `npm test` - Launches the test runner
+- `npm run build` - Builds the app for production
+- `npm run eject` - Ejects from Create React App (one-way operation)
+
+## Project Structure
+
+```
+src/
+├── Admin/
+│   ├── AdminDashboard.jsx       # Main admin dashboard
+│   ├── AdminDashboard.css       # Unified styling for dashboards
+│   ├── Calender.jsx            # Calendar component
+│   ├── Patients/
+│   │   ├── PatientForm.jsx     # Patient creation/editing form
+│   │   └── PatientList.jsx     # Patient management table
+│   └── Incidents/
+│       ├── IncidentForm.jsx    # Incident reporting form
+│       └── IncidentList.jsx    # Incident management
+├── Patient/
+│   └── PatientDashboard.jsx    # Patient dashboard with profile editing
+├── LoginPage.jsx               # Authentication component
+├── App.js                      # Main application component
+├── App.css                     # Global application styles
+└── index.js                    # Application entry point
+```
+
+## Technology Stack
+
+- **Frontend**: React.js (Functional Components with Hooks)
+- **Styling**: CSS3 with modern design patterns
+- **State Management**: React useState and localStorage
+- **Authentication**: Role-based with local storage
+- **UI/UX**: Card-based design with gradients and animations
+
+## User Experience Features
+
+### Admin Features
+- **Patient Table Management**: Professional table with action buttons (Incidents, Edit, Delete)
+- **KPI Cards**: Visual dashboard with key metrics
+- **Appointment Scheduling**: Calendar-based appointment management
+- **Responsive Design**: Optimized for desktop and mobile devices
+
+### Patient Features
+- **Profile Editing**: In-place editing with save/cancel functionality
+- **Summary Dashboard**: Personal statistics and overview
+- **Medical History**: Access to treatment records and appointments
+- **Responsive Layout**: Mobile-friendly interface
+
+## Design System
+
+### Color Scheme
+- **Primary Gradient**: Purple to blue (#667eea to #764ba2)
+- **Success**: Green tones (#28a745 to #20c997)
+- **Warning**: Orange/red tones (#ff6b6b to #ee5a24)
+- **Danger**: Red tones (#dc3545 to #c82333)
+
+### UI Components
+- **Cards**: Elevated design with subtle shadows
+- **Buttons**: Gradient backgrounds with hover effects
+- **Tables**: Professional styling with hover states
+- **Forms**: Clean input design with focus states
+
+## Security Features
+
+- **Role-based Access Control**: Users can only access appropriate features
+- **Data Isolation**: Patients cannot access other patients' data
+- **Session Management**: Login state persisted in localStorage
+- **Input Validation**: Form validation for data integrity
+
+## Browser Compatibility
+
+- Chrome 70+
+- Firefox 65+
+- Safari 12+
+- Edge 79+
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/new-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/new-feature`)
+5. Create a Pull Request
+
+## Support
+
+For support, please contact the development team or create an issue in the repository.
+
+---
+
+**© 2025 Dental Center Management System**
