@@ -108,7 +108,7 @@ const LoginPage = () => {
         </form>
 
         <div className="login-footer">
-          <p>© 2025 Dental Center Management System</p>
+          <p>© Sumanth's Dental Center</p>
         </div>
       </div>
     </div>
