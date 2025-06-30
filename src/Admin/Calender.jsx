@@ -170,7 +170,7 @@ const Calendar = ({ user, onLogout, onBack }) => {
         <div className="header-content">
           <div className="header-left">
             <button onClick={onBack} className="back-btn">← Back</button>
-            <h1>Calendar & Appointments</h1>
+            <h1>Calendar</h1>
           </div>
           <div className="user-info">
             <span>Welcome, {user.email}</span>

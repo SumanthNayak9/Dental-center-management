@@ -72,7 +72,8 @@ const AdminDashboard = ({ user, onLogout }) => {
     <div className="dashboard-container">
       <header className="dashboard-header">
         <div className="header-content">
-          <h1>Dentist Dashboard</h1>
+          <div className="header-left"></div>
+          <h1 className="header-center">Dentist Dashboard</h1>
           <div className="user-info">
             <span>Welcome, {user.email}</span>
             <button onClick={onLogout} className="logout-btn">
