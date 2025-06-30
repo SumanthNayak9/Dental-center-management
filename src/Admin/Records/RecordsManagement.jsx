@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useData } from '../../contexts';
 import './RecordsManagement.css';
 
 const RecordsManagement = ({ user, onLogout, onBack }) => {
@@ -9,95 +10,62 @@ const RecordsManagement = ({ user, onLogout, onBack }) => {
   const [recordTitle, setRecordTitle] = useState('');
   const [recordCategory, setRecordCategory] = useState('general');
 
-  // Mock patient data with records
-  const [patients] = useState([
-    {
-      id: 1,
-      name: 'John Smith',
-      dob: '1985-03-15',
-      email: 'john.smith@email.com',
-      phone: '+1 (555) 123-4567',
-      records: [
-        {
-          id: 1,
-          title: 'Dental X-Ray',
-          type: 'image',
-          category: 'imaging',
-          date: '2024-06-25',
-          filename: 'xray_2024_06_25.jpg',
-          size: '2.3 MB',
-          uploadedBy: 'Dr. Johnson'
-        },
-        {
-          id: 2,
-          title: 'Treatment Plan',
-          type: 'file',
-          category: 'treatment',
-          date: '2024-06-20',
-          filename: 'treatment_plan.pdf',
-          size: '1.8 MB',
-          uploadedBy: 'Dr. Johnson'
-        },
-        {
-          id: 3,
-          title: 'Patient Notes',
-          type: 'text',
-          category: 'notes',
-          date: '2024-06-18',
-          content: 'Patient shows good oral hygiene. Recommended regular cleaning every 6 months.',
-          uploadedBy: 'Dr. Johnson'
-        }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Emma Johnson',
-      dob: '1990-07-22',
-      email: 'emma.johnson@email.com',
-      phone: '+1 (555) 234-5678',
-      records: [
-        {
-          id: 4,
-          title: 'Consultation Report',
-          type: 'file',
-          category: 'consultation',
-          date: '2024-06-22',
-          filename: 'consultation_report.pdf',
-          size: '956 KB',
-          uploadedBy: 'Dr. Smith'
-        },
-        {
-          id: 5,
-          title: 'Pre-treatment Photos',
-          type: 'image',
-          category: 'imaging',
-          date: '2024-06-20',
-          filename: 'pretreatment_photos.jpg',
-          size: '3.1 MB',
-          uploadedBy: 'Dr. Smith'
-        }
-      ]
-    },
-    {
-      id: 3,
-      name: 'Michael Brown',
-      dob: '1978-11-08',
-      email: 'michael.brown@email.com',
-      phone: '+1 (555) 345-6789',
-      records: [
-        {
-          id: 6,
-          title: 'Insurance Form',
-          type: 'file',
-          category: 'insurance',
-          date: '2024-06-15',
-          filename: 'insurance_claim.pdf',
-          size: '1.2 MB',
-          uploadedBy: 'Staff'
-        }
-      ]
-    }
-  ]);
+  // Get patient data from context
+  const { patients } = useData();
+
+  // Enhanced patient data with sample records for demonstration
+  const patientsWithRecords = patients.map(patient => ({
+    ...patient,
+    records: [
+      // Treatment records based on patient's treatment history
+      ...(patient.treatmentHistory || []).map((treatment, index) => ({
+        id: `treatment-${patient.id}-${index}`,
+        title: `${treatment.treatment} - Treatment Record`,
+        type: 'file',
+        category: 'treatment',
+        date: treatment.date,
+        filename: `treatment_record_${treatment.date.replace(/-/g, '_')}.pdf`,
+        size: `${Math.floor(Math.random() * 3) + 1}.${Math.floor(Math.random() * 9) + 1} MB`,
+        uploadedBy: treatment.doctor,
+        content: `Treatment: ${treatment.treatment}, Cost: ₹${treatment.cost.toLocaleString('en-IN')}, Doctor: ${treatment.doctor}`
+      })),
+      
+      // Medical history record
+      {
+        id: `history-${patient.id}`,
+        title: 'Medical History',
+        type: 'text',
+        category: 'notes',
+        date: patient.lastVisit || '2024-01-01',
+        content: `Medical History: ${patient.medicalHistory || 'No significant history'}\nBlood Type: ${patient.bloodType}\nAllergies: ${patient.allergies}\nEmergency Contact: ${patient.emergencyContact}`,
+        uploadedBy: 'Staff'
+      },
+      
+      // Sample imaging record
+      {
+        id: `xray-${patient.id}`,
+        title: 'Dental X-Ray',
+        type: 'image',
+        category: 'imaging',
+        date: patient.lastVisit || '2024-01-01',
+        filename: `xray_${patient.name.replace(/\s+/g, '_').toLowerCase()}_${(patient.lastVisit || '2024-01-01').replace(/-/g, '_')}.jpg`,
+        size: `${Math.floor(Math.random() * 3) + 2}.${Math.floor(Math.random() * 9) + 1} MB`,
+        uploadedBy: 'Dr. Radiologist'
+      },
+      
+      // Consultation record if patient has appointments
+      ...(patient.appointments && patient.appointments.length > 0 ? [{
+        id: `consultation-${patient.id}`,
+        title: 'Consultation Report',
+        type: 'file',
+        category: 'consultation',
+        date: patient.appointments[0].date,
+        filename: `consultation_${patient.name.replace(/\s+/g, '_').toLowerCase()}.pdf`,
+        size: `${Math.floor(Math.random() * 2) + 1}.${Math.floor(Math.random() * 9) + 1} MB`,
+        uploadedBy: 'Dr. Consultant'
+      }] : [])
+    ]
+  }));
 
   const handleUploadRecord = (e) => {
     e.preventDefault();
@@ -162,7 +130,7 @@ const RecordsManagement = ({ user, onLogout, onBack }) => {
           <div className="patients-sidebar">
             <h2>Patients</h2>
             <div className="patients-list">
-              {patients.map(patient => (
+              {patientsWithRecords.map(patient => (
                 <div
                   key={patient.id}
                   className={`patient-item ${selectedPatient?.id === patient.id ? 'active' : ''}`}
@@ -189,7 +157,7 @@ const RecordsManagement = ({ user, onLogout, onBack }) => {
                 <div className="patient-header">
                   <div className="patient-info-card">
                     <h2>{selectedPatient.name}</h2>
-                    <p>DOB: {selectedPatient.dob} | Email: {selectedPatient.email} | Phone: {selectedPatient.phone}</p>
+                    <p>Age: {selectedPatient.age} | Email: {selectedPatient.email} | Phone: {selectedPatient.phone}</p>
                   </div>
                   <button
                     className="upload-btn"
