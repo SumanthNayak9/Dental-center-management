@@ -213,37 +213,34 @@ const AdminDashboard = ({ user, onLogout }) => {
           </div>
         </div>
 
-        {/* Top Patients */}
+        {/* Top Patients Based on Appointments */}
         <div className="patients-section">
-          <h2>All Patients Overview</h2>
+          <h2>Top Patients (Most Appointments)</h2>
           <div className="patients-grid">
-            {patients.slice(0, 6).map((patient, index) => {
-              const initials = patient.name.split(' ').map(n => n[0]).join('').toUpperCase();
-              const totalBill = patient.totalBill || 0;
-              const lastVisit = patient.lastVisit ? new Date(patient.lastVisit).toLocaleDateString() : 'N/A';
-              const treatmentCount = patient.treatmentHistory ? patient.treatmentHistory.length : 0;
-              
-              return (
-                <div key={patient.id} className="patient-card">
-                  <div className="patient-avatar">{initials}</div>
-                  <div className="patient-info">
-                    <div className="patient-name">{patient.name}</div>
-                    <div className="patient-stats">{treatmentCount} treatments • Last: {lastVisit}</div>
-                    <div className="patient-incidents">Revenue: ₹{totalBill.toLocaleString('en-IN')} • Age: {patient.age}</div>
+            {patients
+              .sort((a, b) => {
+                const aAppointments = (a.appointments || []).length;
+                const bAppointments = (b.appointments || []).length;
+                return bAppointments - aAppointments;
+              })
+              .slice(0, 6)
+              .map((patient) => {
+                const initials = patient.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                const totalBill = patient.totalBill || 0;
+                const lastVisit = patient.lastVisit ? new Date(patient.lastVisit).toLocaleDateString() : 'N/A';
+                const appointmentCount = patient.appointments ? patient.appointments.length : 0;
+                
+                return (
+                  <div key={patient.id} className="patient-card">
+                    <div className="patient-avatar">{initials}</div>
+                    <div className="patient-info">
+                      <div className="patient-name">{patient.name}</div>
+                      <div className="patient-stats">{appointmentCount} appointments • Last: {lastVisit}</div>
+                      <div className="patient-incidents">Revenue: ₹{totalBill.toLocaleString('en-IN')} • Age: {patient.age}</div>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-            <div className="patient-card">
-              <div className="patient-avatar">
-                <div className="add-patient-icon">+</div>
-              </div>
-              <div className="patient-info">
-                <div className="patient-name">Add New Patient</div>
-                <div className="patient-stats">Click to add new patient</div>
-                <div className="patient-incidents">Expand your practice</div>
-              </div>
-            </div>
+                );
+              })}
           </div>
         </div>
       </main>
