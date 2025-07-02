@@ -69,7 +69,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-05',
               time: '09:00 AM',
               treatment: 'Dental Cleaning',
-              doctor: 'Dr. Mehta',
+              doctor: 'Dr. Rajesh Mehta',
               status: 'Confirmed',
               notes: 'Regular checkup and cleaning'
             },
@@ -78,7 +78,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-15',
               time: '02:00 PM',
               treatment: 'Root Canal Follow-up',
-              doctor: 'Dr. Mehta',
+              doctor: 'Dr. Rajesh Mehta',
               status: 'Scheduled',
               notes: 'Follow-up for root canal treatment'
             }
@@ -88,7 +88,7 @@ export const PatientProfileProvider = ({ children }) => {
               id: 1,
               date: '2024-06-25',
               treatment: 'Root Canal',
-              doctor: 'Dr. Mehta',
+              doctor: 'Dr. Rajesh Mehta',
               notes: 'Root canal treatment on molar. Patient responded well to treatment.',
               prescription: 'Ibuprofen 600mg, Amoxicillin 500mg'
             },
@@ -96,7 +96,7 @@ export const PatientProfileProvider = ({ children }) => {
               id: 2,
               date: '2024-05-20',
               treatment: 'Dental Cleaning',
-              doctor: 'Dr. Mehta',
+              doctor: 'Dr. Rajesh Mehta',
               notes: 'Routine cleaning. Good oral hygiene maintained.',
               prescription: 'None'
             }
@@ -109,7 +109,7 @@ export const PatientProfileProvider = ({ children }) => {
               endDate: '2024-12-01',
               treatments: ['Root Canal Follow-up', 'Crown Placement', 'Regular Cleanings'],
               progress: 60,
-              doctor: 'Dr. Mehta'
+              doctor: 'Dr. Rajesh Mehta'
             }
           ],
           bills: [
@@ -153,7 +153,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-08',
               time: '10:30 AM',
               treatment: 'Teeth Whitening',
-              doctor: 'Dr. Singh',
+              doctor: 'Dr. Priya Singh',
               status: 'Confirmed',
               notes: 'Professional whitening treatment'
             }
@@ -163,7 +163,7 @@ export const PatientProfileProvider = ({ children }) => {
               id: 3,
               date: '2024-06-22',
               treatment: 'Orthodontic Consultation',
-              doctor: 'Dr. Singh',
+              doctor: 'Dr. Priya Singh',
               notes: 'Initial consultation for teeth alignment. Recommended Invisalign treatment.',
               prescription: 'None'
             }
@@ -176,7 +176,7 @@ export const PatientProfileProvider = ({ children }) => {
               endDate: '2025-02-01',
               treatments: ['Initial Impressions', 'Aligner Fittings', 'Monthly Check-ups'],
               progress: 10,
-              doctor: 'Dr. Singh'
+              doctor: 'Dr. Priya Singh'
             }
           ],
           bills: [
@@ -210,7 +210,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-10',
               time: '11:00 AM',
               treatment: 'Crown Placement',
-              doctor: 'Dr. Mehta',
+              doctor: 'Dr. Rajesh Mehta',
               status: 'Confirmed',
               notes: 'Crown placement for tooth #12'
             },
@@ -219,7 +219,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-25',
               time: '03:30 PM',
               treatment: 'Follow-up Checkup',
-              doctor: 'Dr. Mehta',
+              doctor: 'Dr. Rajesh Mehta',
               status: 'Scheduled',
               notes: 'Post-crown placement checkup'
             }
@@ -229,7 +229,7 @@ export const PatientProfileProvider = ({ children }) => {
               id: 4,
               date: '2024-06-15',
               treatment: 'Crown Preparation',
-              doctor: 'Dr. Mehta',
+              doctor: 'Dr. Rajesh Mehta',
               notes: 'Tooth preparation for crown placement. Temporary crown installed.',
               prescription: 'Ibuprofen 400mg as needed'
             }
@@ -242,7 +242,7 @@ export const PatientProfileProvider = ({ children }) => {
               endDate: '2024-08-01',
               treatments: ['Crown Preparation', 'Crown Placement', 'Follow-up Care'],
               progress: 75,
-              doctor: 'Dr. Mehta'
+              doctor: 'Dr. Rajesh Mehta'
             }
           ],
           bills: [
@@ -286,7 +286,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-05',
               time: '09:00 AM',
               treatment: 'Dental Cleaning',
-              doctor: 'Dr. Johnson',
+              doctor: 'Dr. Michael Johnson',
               status: 'Confirmed',
               notes: 'Regular cleaning and checkup'
             },
@@ -295,7 +295,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-15',
               time: '02:00 PM',
               treatment: 'Root Canal Follow-up',
-              doctor: 'Dr. Johnson',
+              doctor: 'Dr. Michael Johnson',
               status: 'Scheduled',
               notes: 'Follow-up for previous root canal treatment'
             }
@@ -305,7 +305,7 @@ export const PatientProfileProvider = ({ children }) => {
               id: 5,
               date: '2024-06-25',
               treatment: 'Root Canal',
-              doctor: 'Dr. Johnson',
+              doctor: 'Dr. Michael Johnson',
               notes: 'Root canal treatment on upper molar. Hypertension monitored during procedure.',
               prescription: 'Amoxicillin 500mg, Ibuprofen 600mg'
             },
@@ -313,7 +313,7 @@ export const PatientProfileProvider = ({ children }) => {
               id: 6,
               date: '2024-05-20',
               treatment: 'Dental Cleaning',
-              doctor: 'Dr. Johnson',
+              doctor: 'Dr. Michael Johnson',
               notes: 'Routine cleaning completed. Patient maintains good oral hygiene.',
               prescription: 'None'
             }
@@ -326,7 +326,7 @@ export const PatientProfileProvider = ({ children }) => {
               endDate: '2024-12-25',
               treatments: ['Root Canal Follow-up', 'Crown Evaluation', 'Regular Cleanings'],
               progress: 40,
-              doctor: 'Dr. Johnson'
+              doctor: 'Dr. Michael Johnson'
             }
           ],
           bills: [
@@ -370,7 +370,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-08',
               time: '10:30 AM',
               treatment: 'Teeth Whitening',
-              doctor: 'Dr. Smith',
+              doctor: 'Dr. Sarah Smith',
               status: 'Confirmed',
               notes: 'Professional teeth whitening treatment'
             }
@@ -380,7 +380,7 @@ export const PatientProfileProvider = ({ children }) => {
               id: 7,
               date: '2024-06-22',
               treatment: 'Orthodontic Consultation',
-              doctor: 'Dr. Smith',
+              doctor: 'Dr. Sarah Smith',
               notes: 'Consultation for cosmetic improvements. Patient interested in whitening and minor alignment.',
               prescription: 'None'
             }
@@ -393,7 +393,7 @@ export const PatientProfileProvider = ({ children }) => {
               endDate: '2024-09-01',
               treatments: ['Teeth Whitening', 'Cosmetic Evaluation', 'Follow-up Care'],
               progress: 25,
-              doctor: 'Dr. Smith'
+              doctor: 'Dr. Sarah Smith'
             }
           ],
           bills: [
@@ -427,7 +427,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-10',
               time: '11:00 AM',
               treatment: 'Crown Placement',
-              doctor: 'Dr. Johnson',
+              doctor: 'Dr. Michael Johnson',
               status: 'Confirmed',
               notes: 'Crown placement for prepared tooth'
             },
@@ -436,7 +436,7 @@ export const PatientProfileProvider = ({ children }) => {
               date: '2024-07-25',
               time: '03:30 PM',
               treatment: 'Follow-up Checkup',
-              doctor: 'Dr. Johnson',
+              doctor: 'Dr. Michael Johnson',
               status: 'Scheduled',
               notes: 'Post-crown placement evaluation'
             }
@@ -446,7 +446,7 @@ export const PatientProfileProvider = ({ children }) => {
               id: 8,
               date: '2024-06-15',
               treatment: 'Crown Preparation',
-              doctor: 'Dr. Johnson',
+              doctor: 'Dr. Michael Johnson',
               notes: 'Crown preparation for damaged molar. Diabetes management discussed.',
               prescription: 'Amoxicillin 500mg (adjusted for diabetes)'
             }
@@ -459,7 +459,7 @@ export const PatientProfileProvider = ({ children }) => {
               endDate: '2024-12-01',
               treatments: ['Crown Placement', 'Diabetic Monitoring', 'Regular Check-ups'],
               progress: 60,
-              doctor: 'Dr. Johnson'
+              doctor: 'Dr. Michael Johnson'
             }
           ],
           bills: [

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth, usePatientProfile } from '../contexts';
+import OnlineConsultation from '../Admin/OnlineConsultation/OnlineConsultation';
 import '../Admin/AdminDashboard.css';
 
 const PatientDashboard = ({ user, onLogout }) => {
@@ -415,11 +416,21 @@ const PatientDashboard = ({ user, onLogout }) => {
     </div>
   );
 
+  const renderOnlineConsultation = () => (
+    <OnlineConsultation 
+      user={user} 
+      onLogout={onLogout} 
+      onBack={() => setCurrentView('dashboard')}
+      userRole="patient"
+    />
+  );
+
   if (currentView === 'appointments') return renderAppointments();
   if (currentView === 'history') return renderMedicalHistory();
   if (currentView === 'plans') return renderTreatmentPlans();
   if (currentView === 'billing') return renderBilling();
   if (currentView === 'profile') return renderProfile();
+  if (currentView === 'consultation') return renderOnlineConsultation();
 
   return (
     <div className="dashboard-container">
@@ -494,6 +505,17 @@ const PatientDashboard = ({ user, onLogout }) => {
             </div>
             <button className="card-button" onClick={() => setCurrentView('profile')}>
               View Profile
+            </button>
+          </div>
+
+          <div className="dashboard-card">
+            <h3>Online Consultation</h3>
+            <p>Connect with doctors via chat, voice, or video call</p>
+            <div className="card-stats">
+              Doctors available 24/7
+            </div>
+            <button className="card-button" onClick={() => setCurrentView('consultation')}>
+              Start Consultation
             </button>
           </div>
         </div>

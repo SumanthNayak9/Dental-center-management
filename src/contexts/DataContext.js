@@ -159,8 +159,8 @@ export const DataProvider = ({ children }) => {
           { id: 2, date: '2024-01-15', time: '2:00 PM', type: 'Checkup', status: 'Completed' }
         ],
         treatmentHistory: [
-          { id: 1, date: '2024-01-15', treatment: 'Routine Cleaning', cost: 3000, doctor: 'Dr. Mehta' },
-          { id: 2, date: '2023-12-10', treatment: 'Root Canal', cost: 25000, doctor: 'Dr. Mehta' }
+          { id: 1, date: '2024-01-15', treatment: 'Routine Cleaning', cost: 3000, doctor: 'Dr. Rajesh Mehta' },
+          { id: 2, date: '2023-12-10', treatment: 'Root Canal', cost: 25000, doctor: 'Dr. Rajesh Mehta' }
         ],
         billingHistory: [
           { id: 1, date: '2024-01-15', amount: 3000, description: 'Routine Cleaning', status: 'Paid' },
@@ -187,7 +187,7 @@ export const DataProvider = ({ children }) => {
           { id: 4, date: '2024-01-20', time: '11:00 AM', type: 'Consultation', status: 'Completed' }
         ],
         treatmentHistory: [
-          { id: 3, date: '2024-01-20', treatment: 'Orthodontic Consultation', cost: 5000, doctor: 'Dr. Singh' }
+          { id: 3, date: '2024-01-20', treatment: 'Orthodontic Consultation', cost: 5000, doctor: 'Dr. Priya Singh' }
         ],
         billingHistory: [
           { id: 3, date: '2024-01-20', amount: 5000, description: 'Orthodontic Consultation', status: 'Paid' }
@@ -213,8 +213,8 @@ export const DataProvider = ({ children }) => {
           { id: 6, date: '2024-01-25', time: '1:00 PM', type: 'Crown Preparation', status: 'Completed' }
         ],
         treatmentHistory: [
-          { id: 5, date: '2024-01-25', treatment: 'Crown Preparation', cost: 18000, doctor: 'Dr. Mehta' },
-          { id: 6, date: '2024-01-10', treatment: 'Crown Placement', cost: 30000, doctor: 'Dr. Mehta' }
+          { id: 5, date: '2024-01-25', treatment: 'Crown Preparation', cost: 18000, doctor: 'Dr. Rajesh Mehta' },
+          { id: 6, date: '2024-01-10', treatment: 'Crown Placement', cost: 30000, doctor: 'Dr. Rajesh Mehta' }
         ],
         billingHistory: [
           { id: 5, date: '2024-01-25', amount: 18000, description: 'Crown Preparation', status: 'Paid' },
@@ -241,8 +241,8 @@ export const DataProvider = ({ children }) => {
           { id: 8, date: '2024-07-15', time: '02:00 PM', type: 'Root Canal Follow-up', status: 'Scheduled' }
         ],
         treatmentHistory: [
-          { id: 7, date: '2024-06-25', treatment: 'Root Canal', cost: 1250, doctor: 'Dr. Johnson' },
-          { id: 8, date: '2024-05-20', treatment: 'Dental Cleaning', cost: 180, doctor: 'Dr. Johnson' }
+          { id: 7, date: '2024-06-25', treatment: 'Root Canal', cost: 1250, doctor: 'Dr. Michael Johnson' },
+          { id: 8, date: '2024-05-20', treatment: 'Dental Cleaning', cost: 180, doctor: 'Dr. Michael Johnson' }
         ],
         billingHistory: [
           { id: 7, date: '2024-06-25', amount: 1250, description: 'Root Canal', status: 'Paid' },
@@ -294,8 +294,8 @@ export const DataProvider = ({ children }) => {
           { id: 11, date: '2024-07-25', time: '03:30 PM', type: 'Follow-up Checkup', status: 'Scheduled' }
         ],
         treatmentHistory: [
-          { id: 10, date: '2024-06-15', treatment: 'Crown Preparation', cost: 800, doctor: 'Dr. Johnson' },
-          { id: 11, date: '2024-07-10', treatment: 'Crown Placement', cost: 1200, doctor: 'Dr. Johnson' }
+          { id: 10, date: '2024-06-15', treatment: 'Crown Preparation', cost: 800, doctor: 'Dr. Michael Johnson' },
+          { id: 11, date: '2024-07-10', treatment: 'Crown Placement', cost: 1200, doctor: 'Dr. Michael Johnson' }
         ],
         billingHistory: [
           { id: 10, date: '2024-06-15', amount: 800, description: 'Crown Preparation', status: 'Paid' },

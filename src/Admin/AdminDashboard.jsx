@@ -6,6 +6,7 @@ import PatientList from './Patients/PatientList';
 import PatientIncidents from './Patients/PatientIncidents';
 import AppointmentBooking from './Appointments/AppointmentBooking';
 import RecordsManagement from './Records/RecordsManagement';
+import OnlineConsultation from './OnlineConsultation/OnlineConsultation';
 
 const AdminDashboard = ({ user, onLogout }) => {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -54,6 +55,17 @@ const AdminDashboard = ({ user, onLogout }) => {
         user={user} 
         onLogout={onLogout} 
         onBack={() => setCurrentView('dashboard')}
+      />
+    );
+  }
+
+  if (currentView === 'consultation') {
+    return (
+      <OnlineConsultation 
+        user={user} 
+        onLogout={onLogout} 
+        onBack={() => setCurrentView('dashboard')}
+        userRole="admin"
       />
     );
   }
@@ -108,6 +120,12 @@ const AdminDashboard = ({ user, onLogout }) => {
             <h3>Records</h3>
             <p>Upload and view various records</p>
             <button className="card-button" onClick={() => setCurrentView('records')}>View Records</button>
+          </div>
+
+          <div className="dashboard-card">
+            <h3>Online Consultation</h3>
+            <p>Chat, voice, and video consultations with patients</p>
+            <button className="card-button" onClick={() => setCurrentView('consultation')}>Start Consultation</button>
           </div>
         </div>
 
