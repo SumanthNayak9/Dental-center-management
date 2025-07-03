@@ -1,26 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useData } from '../../contexts';
 import './OnlineConsultation.css';
 
 const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
+  const { patients } = useData();
   const [consultationMode, setConsultationMode] = useState('chat'); // 'chat', 'voice', 'video'
   const [isCallActive, setIsCallActive] = useState(false);
-  const [currentView, setCurrentView] = useState(userRole === 'patient' ? 'booking' : 'consultation'); // Start with booking for patients
+  const [currentView, setCurrentView] = useState(userRole === 'patient' ? 'booking' : (userRole === 'admin' ? 'patient-selection' : 'consultation')); // Start with patient selection for admins
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [selectedPatient, setSelectedPatient] = useState(null); // For admin to select patient
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [consultationType, setConsultationType] = useState('chat');
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [hasActiveAppointment, setHasActiveAppointment] = useState(false); // Track if patient has booked appointment
   const [bookedAppointmentDetails, setBookedAppointmentDetails] = useState(null);
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      sender: userRole === 'patient' ? 'Dr. Rajesh Mehta' : 'John Smith',
-      message: 'Hello! How can I help you today?',
-      timestamp: new Date().toLocaleTimeString(),
-      isDoctor: userRole === 'patient'
-    }
-  ]);
+  const [activeConsultation, setActiveConsultation] = useState(null); // Track active consultation for admin
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
@@ -29,6 +25,22 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
   const remoteVideoRef = useRef(null);
   const localStreamRef = useRef(null);
   const messagesEndRef = useRef(null);
+
+  // Initialize messages when consultation starts
+  useEffect(() => {
+    if ((userRole === 'admin' && selectedPatient) || (userRole === 'patient' && hasActiveAppointment)) {
+      const initialMessage = {
+        id: 1,
+        sender: userRole === 'patient' ? 'Dr. Rajesh Mehta' : (selectedPatient?.name || 'Patient'),
+        message: userRole === 'admin' 
+          ? `Hello Dr. ${user?.name || user?.email || 'Doctor'}! Thank you for initiating this consultation.`
+          : 'Hello! How can I help you today?',
+        timestamp: new Date().toLocaleTimeString(),
+        isDoctor: userRole === 'patient'
+      };
+      setMessages([initialMessage]);
+    }
+  }, [selectedPatient, hasActiveAppointment, userRole, user]);
 
   const availableDoctors = [
     { 
@@ -108,42 +120,59 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
       // Simulate remote video stream (in real app, this would come from WebRTC)
       setTimeout(() => {
         if (remoteVideoRef.current && mode === 'video') {
-          // Create a canvas element to simulate remote video
-          const canvas = document.createElement('canvas');
-          canvas.width = 320;
-          canvas.height = 240;
-          const ctx = canvas.getContext('2d');
-          
-          // Draw a simple placeholder
-          ctx.fillStyle = '#4a5568';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = '#fff';
-          ctx.font = '16px Arial';
-          ctx.textAlign = 'center';
-          ctx.fillText('Dr. Rajesh Mehta', canvas.width / 2, canvas.height / 2);
-          
-          const simulatedStream = canvas.captureStream();
-          remoteVideoRef.current.srcObject = simulatedStream;
+          try {
+            // Create a canvas element to simulate remote video
+            const canvas = document.createElement('canvas');
+            canvas.width = 320;
+            canvas.height = 240;
+            const ctx = canvas.getContext('2d');
+            
+            // Draw a simple placeholder
+            ctx.fillStyle = '#4a5568';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fff';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            
+            const displayName = userRole === 'admin' 
+              ? (selectedPatient?.name || 'Patient')
+              : 'Dr. Rajesh Mehta';
+            
+            ctx.fillText(displayName, canvas.width / 2, canvas.height / 2);
+            
+            const simulatedStream = canvas.captureStream();
+            remoteVideoRef.current.srcObject = simulatedStream;
+          } catch (canvasError) {
+            console.warn('Could not create simulated video stream:', canvasError);
+          }
         }
       }, 2000);
       
     } catch (error) {
       console.error('Error accessing media devices:', error);
+      setIsCallActive(false);
       alert('Could not access camera/microphone. Please check permissions.');
     }
   };
 
   const endCall = () => {
-    if (localStreamRef.current) {
-      localStreamRef.current.getTracks().forEach(track => track.stop());
-    }
-    setIsCallActive(false);
-    setConsultationMode('chat');
-    if (localVideoRef.current) {
-      localVideoRef.current.srcObject = null;
-    }
-    if (remoteVideoRef.current) {
-      remoteVideoRef.current.srcObject = null;
+    try {
+      if (localStreamRef.current) {
+        localStreamRef.current.getTracks().forEach(track => track.stop());
+      }
+      setIsCallActive(false);
+      setConsultationMode('chat');
+      if (localVideoRef.current) {
+        localVideoRef.current.srcObject = null;
+      }
+      if (remoteVideoRef.current) {
+        remoteVideoRef.current.srcObject = null;
+      }
+    } catch (error) {
+      console.error('Error ending call:', error);
+      // Still set the state even if there's an error
+      setIsCallActive(false);
+      setConsultationMode('chat');
     }
   };
 
@@ -172,7 +201,7 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
     if (newMessage.trim()) {
       const message = {
         id: messages.length + 1,
-        sender: userRole === 'patient' ? user.name : 'Dr. Rajesh Mehta',
+        sender: userRole === 'admin' ? `Dr. ${user?.name || user?.email || 'Doctor'}` : (user?.name || user?.email || 'Patient'),
         message: newMessage,
         timestamp: new Date().toLocaleTimeString(),
         isDoctor: userRole === 'admin'
@@ -184,8 +213,10 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
       setTimeout(() => {
         const response = {
           id: messages.length + 2,
-          sender: userRole === 'patient' ? 'Dr. Rajesh Mehta' : 'Patient',
-          message: 'Thank you for that information. Let me review and get back to you.',
+          sender: userRole === 'admin' ? (selectedPatient?.name || 'Patient') : 'Dr. Rajesh Mehta',
+          message: userRole === 'admin' 
+            ? 'Thank you doctor. I appreciate you taking the time to consult with me.'
+            : 'Thank you for that information. Let me review and get back to you.',
           timestamp: new Date().toLocaleTimeString(),
           isDoctor: userRole === 'patient'
         };
@@ -406,7 +437,105 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
     </div>
   );
 
+  const handlePatientSelection = (patient) => {
+    if (!patient) {
+      console.error('No patient selected');
+      return;
+    }
+    
+    setSelectedPatient(patient);
+    setActiveConsultation({
+      patient: patient,
+      doctor: user?.name || user?.email || 'Dr. Admin',
+      startTime: new Date().toLocaleTimeString(),
+      type: 'direct' // Direct consultation initiated by doctor
+    });
+    setCurrentView('consultation');
+  };
+
+  const endConsultation = () => {
+    setSelectedPatient(null);
+    setActiveConsultation(null);
+    setMessages([]);
+    setIsCallActive(false);
+    setCurrentView('patient-selection');
+  };
+
+  // Patient selection render function for admins
+  const renderPatientSelection = () => (
+    <div className="patient-selection-container">
+      <div className="selection-header">
+        <h2>Select a Patient for Consultation</h2>
+        <p>Choose a patient to initiate an online consultation</p>
+      </div>
+      
+      <div className="patients-grid">
+        {patients && patients.length > 0 ? patients.map(patient => (
+          <div key={patient.id} className="patient-selection-card">
+            <div className="patient-avatar">
+              {patient.name ? patient.name.split(' ').map(n => n[0]).join('') : 'P'}
+            </div>
+            <div className="patient-info">
+              <h4>{patient.name || 'Unknown Patient'}</h4>
+              <p>Age: {patient.age || 'N/A'}</p>
+              <p>Phone: {patient.phone || 'N/A'}</p>
+              <p>Email: {patient.email || 'N/A'}</p>
+              <p>Last Visit: {patient.lastVisit || 'No previous visits'}</p>
+              {patient.nextAppointment && (
+                <p className="next-appointment">
+                  Next Appointment: {patient.nextAppointment}
+                </p>
+              )}
+              <div className="patient-status">
+                <span className="status-dot" style={{ backgroundColor: '#28a745' }}></span>
+                Available for consultation
+              </div>
+              <button 
+                className="start-consultation-btn"
+                onClick={() => handlePatientSelection(patient)}
+              >
+                Start Consultation
+              </button>
+            </div>
+          </div>
+        )) : (
+          <div className="no-patients">
+            <p>No patients available for consultation at the moment.</p>
+          </div>
+        )}
+      </div>
+      
+      {patients && patients.length === 0 && (
+        <div className="no-patients">
+          <p>No patients available for consultation at the moment.</p>
+        </div>
+      )}
+    </div>
+  );
+
   // Handle different views
+  if (currentView === 'patient-selection') {
+    return (
+      <div className="dashboard-container">
+        <header className="dashboard-header">
+          <div className="header-content">
+            <div className="header-left">
+              <button onClick={onBack} className="back-btn">← Back</button>
+              <h1>Start Patient Consultation</h1>
+            </div>
+            <div className="user-info">
+              <span>Welcome, Dr. {user.name || user.email}</span>
+              <button onClick={onLogout} className="logout-btn">Logout</button>
+            </div>
+          </div>
+        </header>
+        <main className="consultation-main">
+          {renderPatientSelection()}
+        </main>
+      </div>
+    );
+  }
+
   if (currentView === 'booking') {
     return (
       <div className="dashboard-container">
@@ -470,8 +599,15 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
       <header className="dashboard-header">
         <div className="header-content">
           <div className="header-left">
-            <button onClick={onBack} className="back-btn">← Back</button>
+            <button onClick={userRole === 'admin' ? endConsultation : onBack} className="back-btn">
+              ← {userRole === 'admin' ? 'End Consultation' : 'Back'}
+            </button>
             <h1>Online Consultation</h1>
+            {activeConsultation && userRole === 'admin' && (
+              <div className="consultation-info">
+                <span>Consulting with {activeConsultation.patient.name} - Started at {activeConsultation.startTime}</span>
+              </div>
+            )}
             {bookedAppointmentDetails && userRole === 'patient' && (
               <div className="appointment-info">
                 <span>Appointment with {bookedAppointmentDetails.doctor} at {bookedAppointmentDetails.time}</span>
@@ -479,7 +615,7 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
             )}
           </div>
           <div className="user-info">
-            <span>Welcome, {user.email}</span>
+            <span>Welcome, {userRole === 'admin' ? `Dr. ${user.name || user.email}` : user.email}</span>
             <button onClick={onLogout} className="logout-btn">Logout</button>
           </div>
         </div>
@@ -524,27 +660,74 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
               </>
             ) : (
               <>
-                <h3>Patient Queue</h3>
-                <div className="patients-queue">
-                  {patientQueue.map(patient => (
-                    <div key={patient.id} className="patient-queue-card">
+                <h3>Current Consultation</h3>
+                {selectedPatient ? (
+                  <div className="current-patient-info">
+                    <div className="patient-card">
                       <div className="patient-avatar">
-                        {patient.name.split(' ').map(n => n[0]).join('')}
+                        {selectedPatient.name ? selectedPatient.name.split(' ').map(n => n[0]).join('') : 'P'}
                       </div>
-                      <div className="patient-info">
-                        <div className="patient-name">{patient.name}</div>
-                        <div className="appointment-time">{patient.appointmentTime}</div>
-                        <div className="patient-status">
-                          <span 
-                            className="status-dot" 
-                            style={{ backgroundColor: getStatusColor(patient.status) }}
-                          ></span>
-                          {patient.status}
-                        </div>
+                      <div className="patient-details">
+                        <h4>{selectedPatient.name || 'Unknown Patient'}</h4>
+                        <p>Age: {selectedPatient.age || 'N/A'}</p>
+                        <p>Phone: {selectedPatient.phone || 'N/A'}</p>
+                        <p>Email: {selectedPatient.email || 'N/A'}</p>
+                        {selectedPatient.medicalHistory && (
+                          <div className="medical-info">
+                            <p><strong>Medical History:</strong></p>
+                            <p>{selectedPatient.medicalHistory}</p>
+                          </div>
+                        )}
+                        {selectedPatient.allergies && (
+                          <div className="allergies-info">
+                            <p><strong>Allergies:</strong></p>
+                            <p>{selectedPatient.allergies}</p>
+                          </div>
+                        )}
+                        {selectedPatient.currentSymptoms && (
+                          <div className="symptoms">
+                            <p><strong>Current Symptoms:</strong></p>
+                            <p>{selectedPatient.currentSymptoms}</p>
+                          </div>
+                        )}
                       </div>
                     </div>
-                  ))}
-                </div>
+                    
+                    <div className="consultation-controls">
+                      <h4>Consultation Tools</h4>
+                      <button 
+                        className="tool-btn"
+                        onClick={() => startCall('voice')}
+                        disabled={isCallActive}
+                      >
+                        📞 Start Voice Call
+                      </button>
+                      <button 
+                        className="tool-btn"
+                        onClick={() => startCall('video')}
+                        disabled={isCallActive}
+                      >
+                        📹 Start Video Call
+                      </button>
+                      <button 
+                        className="tool-btn end-call"
+                        onClick={endConsultation}
+                      >
+                        ❌ End Consultation
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="no-patient-selected">
+                    <p>No patient selected for consultation</p>
+                    <button 
+                      className="select-patient-btn"
+                      onClick={() => setCurrentView('patient-selection')}
+                    >
+                      Select Patient
+                    </button>
+                  </div>
+                )}
               </>
             )}
           </div>
@@ -575,9 +758,14 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
                   <div className="voice-call-container">
                     <div className="voice-call-info">
                       <div className="caller-avatar">
-                        {userRole === 'patient' ? 'DM' : 'JS'}
+                        {userRole === 'patient' ? 'DM' : (selectedPatient ? selectedPatient.name.split(' ').map(n => n[0]).join('') : 'P')}
                       </div>
-                      <h3>{userRole === 'patient' ? 'Dr. Rajesh Mehta' : 'John Smith'}</h3>
+                      <h3>
+                        {userRole === 'patient' 
+                          ? 'Dr. Rajesh Mehta' 
+                          : (selectedPatient ? selectedPatient.name : 'Patient')
+                        }
+                      </h3>
                       <p>Voice call in progress...</p>
                     </div>
                   </div>
@@ -610,7 +798,12 @@ const OnlineConsultation = ({ user, onLogout, onBack, userRole }) => {
             {/* Chat area */}
             <div className={`chat-area ${isCallActive ? 'with-call' : ''}`}>
               <div className="chat-header">
-                <h3>Chat with {userRole === 'patient' ? 'Dr. Rajesh Mehta' : 'Patient'}</h3>
+                <h3>
+                  Chat with {userRole === 'patient' 
+                    ? 'Dr. Rajesh Mehta' 
+                    : (selectedPatient ? selectedPatient.name : 'Patient')
+                  }
+                </h3>
                 <div className="call-buttons">
                   <button 
                     className="call-btn voice-btn"

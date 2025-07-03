@@ -618,6 +618,269 @@
   color: #38a169;
 }
 
+/* Patient Selection Styles for Admin */
+.patient-selection-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.selection-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.selection-header h2 {
+  color: #2d3748;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.selection-header p {
+  color: #718096;
+  font-size: 16px;
+}
+
+.patients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.patient-selection-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.patient-selection-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.patient-selection-card .patient-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  margin: 0 auto 16px;
+}
+
+.patient-selection-card .patient-info h4 {
+  color: #2d3748;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.patient-selection-card .patient-info p {
+  color: #4a5568;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.patient-selection-card .next-appointment {
+  color: #3182ce;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.patient-selection-card .patient-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0;
+  color: #38a169;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.start-consultation-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 16px;
+}
+
+.start-consultation-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.no-patients {
+  text-align: center;
+  padding: 60px 20px;
+  color: #718096;
+}
+
+/* Current Patient Info in Admin Sidebar */
+.current-patient-info {
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.current-patient-info .patient-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.current-patient-info .patient-details h4 {
+  color: #2d3748;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.current-patient-info .patient-details p {
+  color: #4a5568;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.medical-info, .allergies-info {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.medical-info p, .allergies-info p {
+  margin: 4px 0;
+  color: #4a5568;
+  font-size: 14px;
+}
+
+.allergies-info p:first-child {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.medical-info p:first-child {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+/* Consultation Controls */
+.consultation-controls {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.consultation-controls h4 {
+  color: #2d3748;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.tool-btn {
+  width: 100%;
+  background: white;
+  border: 2px solid #e2e8f0;
+  color: #4a5568;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.tool-btn:hover {
+  border-color: #667eea;
+  color: #667eea;
+  background-color: #f7fafc;
+}
+
+.tool-btn.end-call {
+  background: #fed7d7;
+  border-color: #fc8181;
+  color: #c53030;
+}
+
+.tool-btn.end-call:hover {
+  background: #feb2b2;
+  border-color: #f56565;
+}
+
+.tool-btn:disabled {
+  background: #f7fafc;
+  border-color: #e2e8f0;
+  color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.no-patient-selected {
+  text-align: center;
+  padding: 20px;
+  color: #718096;
+}
+
+.select-patient-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 12px;
+}
+
+.select-patient-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Consultation Info Header */
+.consultation-info {
+  background: #e6fffa;
+  color: #234e52;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 16px;
+}
+
+.consultation-info span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .consultation-layout {

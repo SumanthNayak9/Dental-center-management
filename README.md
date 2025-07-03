@@ -8,6 +8,8 @@ A comprehensive role-based dental center management system built with React.js, 
 - **Patient Management**: View, edit, and manage patient records
 - **Appointment Management**: Schedule and track appointments
 - **Incident Tracking**: Monitor and manage patient incidents
+- **Online Consultations**: Initiate consultations with patients (chat, voice, video)
+- **Patient Selection**: Choose any patient for direct consultation
 - **KPI Dashboard**: Overview of key performance indicators
 - **Profile Management**: Edit patient profiles and medical information
 
@@ -16,14 +18,31 @@ A comprehensive role-based dental center management system built with React.js, 
 - **Appointment History**: Track past and upcoming appointments
 - **Medical Records**: Access medical history and treatment records
 - **Incident Reports**: View any reported incidents
+- **Online Consultations**: Book appointments and consult with doctors (chat, voice, video)
 - **Summary Statistics**: Personal health and visit statistics
+
+### Online Consultation System
+- **Bidirectional Communication**: Both doctors and patients can initiate consultations
+- **Multiple Communication Modes**: 
+  - Text chat for quick questions and follow-ups
+  - Voice calls for detailed discussions
+  - Video calls for visual examinations
+- **Patient Booking System**: Patients can book appointments with available doctors
+- **Doctor-Initiated Consultations**: Doctors can directly select and consult with any patient
+- **Real-time Messaging**: Instant chat with automated responses for testing
+- **Consultation Management**: Track active consultations and appointment history
 
 ### Key Features
 - **Role-based Authentication**: Separate access for admins and patients
 - **Data Isolation**: Patients can only access their own data
+- **Bidirectional Online Consultations**: Both doctors and patients can initiate consultations
+- **Multi-modal Communication**: Chat, voice, and video consultation options
 - **Responsive Design**: Modern, card-based UI that works on all devices
 - **Professional Styling**: Consistent design language throughout the application
 - **Real-time Updates**: Dynamic data management and updates
+- **Indian Rupees Currency**: All pricing displayed in ₹ with proper formatting
+- **Context API State Management**: Efficient state management across the application
+- **Vercel Analytics Integration**: Built-in analytics for performance tracking
 
 ## Login Credentials
 
