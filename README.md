@@ -164,7 +164,6 @@ App.js
 - **Multi-region Support**: Patients from India and international locations
 
 ### Analytics & Monitoring
-- **Vercel Analytics**: Integrated performance tracking
 - **Error Handling**: Defensive coding practices throughout components
 - **Performance Optimization**: React.memo and useCallback where appropriate
 
